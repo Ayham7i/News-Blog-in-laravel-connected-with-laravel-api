@@ -1,45 +1,55 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h1>Edit Article</h1>
-    <form action="{{ route('admin.articles.update', $article['id']) }}" method="POST">
-        @csrf
-        @method('PUT')
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold text-center text-white mb-8">Edit Article</h1>
 
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" name="title" class="form-control" value="{{ $article['title'] }}" required>
-        </div>
+        <form action="{{ route('admin.articles.update', $article['id']) }}" method="POST" class="max-w-2xl mx-auto bg-gray-800 p-8 rounded-lg shadow-lg">
+            @csrf
+            @method('PUT')
 
-        <div class="form-group">
-            <label for="content">Content</label>
-            <textarea name="content" class="form-control" rows="5" required>{{ $article['content'] }}</textarea>
-        </div>
+            <!-- Title Field -->
+            <div class="mb-6">
+                <label for="title" class="block text-gray-300 text-sm font-bold mb-2">Title</label>
+                <input type="text" name="title" class="w-full px-4 py-2 rounded-lg bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-600" value="{{ $article['title'] }}" required>
+            </div>
 
-        <div class="form-group">
-            <label for="author_id">Author</label>
-            <select name="author_id" class="form-control" required>
-                @foreach($authors as $author)
-                    <option value="{{ $author['id'] }}" {{ $article['author_id'] == $author['id'] ? 'selected' : '' }}>
-                        {{ $author['name'] }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
+            <!-- Content Field -->
+            <div class="mb-6">
+                <label for="content" class="block text-gray-300 text-sm font-bold mb-2">Content</label>
+                <textarea name="content" rows="5" class="w-full px-4 py-2 rounded-lg bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-600" required>{{ $article['content'] }}</textarea>
+            </div>
 
-        <div class="form-group">
-            <label for="category_id">Category</label>
-            <select name="category_id" class="form-control" required>
-                @foreach($categories as $category)
-                    <option value="{{ $category['id'] }}" {{ $article['category_id'] == $category['id'] ? 'selected' : '' }}>
-                        {{ $category['name'] }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
+            <!-- Author Selection -->
+            <div class="mb-6">
+                <label for="author_id" class="block text-gray-300 text-sm font-bold mb-2">Author</label>
+                <select name="author_id" class="w-full px-4 py-2 rounded-lg bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-600" required>
+                    @foreach($authors as $author)
+                        <option value="{{ $author['id'] }}" {{ $article['author_id'] == $author['id'] ? 'selected' : '' }}>
+                            {{ $author['name'] }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
 
-        <button type="submit" class="btn btn-primary">Update</button>
-    </form>
-</div>
+            <!-- Category Selection -->
+            <div class="mb-6">
+                <label for="category_id" class="block text-gray-300 text-sm font-bold mb-2">Category</label>
+                <select name="category_id" class="w-full px-4 py-2 rounded-lg bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-600" required>
+                    @foreach($categories as $category)
+                        <option value="{{ $category['id'] }}" {{ $article['category_id'] == $category['id'] ? 'selected' : '' }}>
+                            {{ $category['name'] }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <!-- Update Button -->
+            <div class="flex justify-center">
+                <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg transition">
+                    Update Article
+                </button>
+            </div>
+        </form>
+    </div>
 @endsection

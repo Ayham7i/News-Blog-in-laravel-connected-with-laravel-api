@@ -2,12 +2,15 @@
 
 @section('content')
     <div class="container mx-auto p-6">
-        <h1 class="text-3xl font-bold text-center text-white mb-8">Articles</h1>
+        <!-- Main Title -->
+        <h1 class="text-4xl font-extrabold text-center text-white mb-8">
+            Manage Articles
+        </h1>
 
         <!-- Create New Article Button -->
         <div class="flex justify-center mb-8">
-            <a href="{{ route('admin.articles.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition">
-                Create New Article
+            <a href="{{ route('admin.articles.create') }}" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition">
+                + Create New Article
             </a>
         </div>
 
