@@ -89,7 +89,7 @@ class ApiService
     }
 
     // --- Category API Methods ---
-    
+
     // Fetch all categories
     public function getCategories()
     {
@@ -128,6 +128,50 @@ class ApiService
         $response = $this->client->delete("api/categories/{$id}");
         return json_decode($response->getBody()->getContents(), true);
     }
+
+    // Fetch all comments
+    public function getComments()
+    {
+        $response = $this->client->get('api/comments');
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+    // Fetch a specific comment
+    public function getComment($id)
+    {
+        $response = $this->client->get("api/comments/{$id}");
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+    // Create a new comment
+    public function createComment($data)
+    {
+        $response = $this->client->post('api/comments', [
+                'form_params' => $data
+        ]);
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+    // Update an existing comment
+    public function updateComment($id, $data)
+    {
+        $response = $this->client->put("api/comments/{$id}", [
+            'form_params' => $data
+        ]);
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+    // Delete a comment
+    public function deleteComment($id)
+    {
+        $response = $this->client->delete("api/comments/{$id}");
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+
+
+
+
 
 
 
