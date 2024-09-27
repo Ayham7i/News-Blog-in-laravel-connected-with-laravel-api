@@ -3,13 +3,13 @@
 @section('content')
     <div class="container mx-auto p-6">
         <!-- Main Title -->
-        <h1 class="text-4xl font-extrabold text-center text-white mb-8">
+        <h1 class="text-5xl font-extrabold text-center text-white mb-12">
             Manage Articles
         </h1>
 
         <!-- Create New Article Button -->
         <div class="flex justify-center mb-8">
-            <a href="{{ route('admin.articles.create') }}" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition">
+            <a href="{{ route('admin.articles.create') }}" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 shadow-lg">
                 + Create New Article
             </a>
         </div>
@@ -28,7 +28,7 @@
                 </thead>
                 <tbody>
                     @foreach($articles as $article)
-                        <tr class="bg-gray-900 hover:bg-gray-700 transition">
+                        <tr class="bg-gray-900 hover:bg-gray-700 transition duration-300">
                             <td class="px-6 py-4">{{ $article['title'] }}</td>
                             <td class="px-6 py-4">
                                 @php
@@ -44,11 +44,11 @@
                             </td>
                             <td class="px-6 py-4">{{ Str::limit($article['content'], 50) }}</td> <!-- Limit content to 50 characters -->
                             <td class="px-6 py-4 text-center">
-                                <a href="{{ route('admin.articles.edit', $article['id']) }}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded transition mr-2">Edit</a>
+                                <a href="{{ route('admin.articles.edit', $article['id']) }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 mr-2">Edit</a>
                                 <form action="{{ route('admin.articles.destroy', $article['id']) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                                    <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full transition duration-300" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
                                 </form>
                             </td>
                         </tr>

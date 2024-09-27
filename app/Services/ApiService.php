@@ -89,10 +89,47 @@ class ApiService
     }
 
     // --- Category API Methods ---
-
+    
+    // Fetch all categories
     public function getCategories()
     {
         $response = $this->client->get('api/categories');
         return json_decode($response->getBody()->getContents(), true);
     }
+
+    // Fetch a specific category
+    public function getCategory($id)
+    {
+        $response = $this->client->get("api/categories/{$id}");
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+    // Create a new category
+    public function createCategory($data)
+    {
+        $response = $this->client->post('api/categories', [
+            'form_params' => $data
+        ]);
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+    // Update an existing category
+    public function updateCategory($id, $data)
+    {
+        $response = $this->client->put("api/categories/{$id}", [
+            'form_params' => $data
+        ]);
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+    // Delete a category
+    public function deleteCategory($id)
+    {
+        $response = $this->client->delete("api/categories/{$id}");
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+
+
+
 }

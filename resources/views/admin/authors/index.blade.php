@@ -38,8 +38,9 @@
                         <td class="px-6 py-4">{{ $author['name'] }}</td>
                         <td class="px-6 py-4">{{ $author['email'] }}</td>
                         <td class="px-6 py-4 text-center">
+                            <!-- Updated Edit Button to Green -->
                             <a href="{{ route('admin.authors.edit', $author['id']) }}"
-                               class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded transition mr-2">
+                               class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 mr-2">
                                 Edit
                             </a>
                             <form action="{{ route('admin.authors.destroy', $author['id']) }}"
