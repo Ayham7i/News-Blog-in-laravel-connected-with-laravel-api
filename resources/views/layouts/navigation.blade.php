@@ -96,6 +96,9 @@
             <x-responsive-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.index')">
                 {{ __('Categories') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.comments.index')" :active="request()->routeIs('admin.comments.index')">
+                {{ __('Comments') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

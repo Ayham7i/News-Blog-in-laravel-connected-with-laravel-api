@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\AuthorController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CommentController;
+
 
 
 
@@ -43,6 +45,10 @@ Route::prefix('admin')->name('admin.')->group(function() {
 
 Route::prefix('admin')->name('admin.')->group(function() {
     Route::resource('categories', CategoryController::class);
+});
+
+Route::prefix('admin')->name('admin.')->group(function() {
+    Route::resource('comments', CommentController::class);
 });
 
 

@@ -5,19 +5,21 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Services\ApiService;
 use Illuminate\Http\Request;
+use App\Facades\ApiServiceFacade;
+
 
 class AuthorController extends Controller
 {
-    protected $apiService;
+    // protected $apiService;
 
-    public function __construct(ApiService $apiService)
-    {
-        $this->apiService = $apiService;
-    }
+    // public function __construct(ApiService $apiService)
+    // {
+    //     $this->apiService = $apiService;
+    // }
 
     public function index()
     {
-        $authors = $this->apiService->getAuthors();
+        $authors = ApiServiceFacade::getAuthors();
         return view('admin.authors.index', compact('authors'));
     }
 
@@ -33,13 +35,13 @@ class AuthorController extends Controller
             'email' => 'required|email|unique:authors,email',
         ]);
 
-        $this->apiService->createAuthor($validatedData);
+        ApiServiceFacade::createAuthor($validatedData);
         return redirect()->route('admin.authors.index')->with('success', 'Author created successfully');
     }
 
     public function edit($id)
     {
-        $author = $this->apiService->getAuthor($id);
+        $author = ApiServiceFacade::getAuthor($id);
         return view('admin.authors.edit', compact('author'));
     }
 
@@ -50,13 +52,13 @@ class AuthorController extends Controller
             'email' => 'required|email|unique:authors,email,' . $id,
         ]);
 
-        $this->apiService->updateAuthor($id, $validatedData);
+        ApiServiceFacade::updateAuthor($id, $validatedData);
         return redirect()->route('admin.authors.index')->with('success', 'Author updated successfully');
     }
 
     public function destroy($id)
     {
-        $this->apiService->deleteAuthor($id);
+        ApiServiceFacade::deleteAuthor($id);
         return redirect()->route('admin.authors.index')->with('success', 'Author deleted successfully');
     }
 }

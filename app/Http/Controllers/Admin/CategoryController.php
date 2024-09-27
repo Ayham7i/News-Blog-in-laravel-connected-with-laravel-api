@@ -5,20 +5,22 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Services\ApiService;
 use Illuminate\Http\Request;
+use App\Facades\ApiServiceFacade;
+
 
 class CategoryController extends Controller
 {
-    protected $apiService;
+    // protected $apiService;
 
-    public function __construct(ApiService $apiService)
-    {
-        $this->apiService = $apiService;
-    }
+    // public function __construct(ApiService $apiService)
+    // {
+    //     $this->apiService = $apiService;
+    // }
 
     // Display the list of categories
     public function index()
     {
-        $categories = $this->apiService->getCategories();
+        $categories = ApiServiceFacade::getCategories();
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -35,7 +37,7 @@ class CategoryController extends Controller
             'name' => 'required|string|max:255'
         ]);
 
-        $this->apiService->createCategory($request->all());
+        ApiServiceFacade::createCategory($request->all());
 
         return redirect()->route('admin.categories.index')->with('success', 'Category created successfully.');
     }
@@ -43,7 +45,7 @@ class CategoryController extends Controller
     // Show the form to edit a category
     public function edit($id)
     {
-        $category = $this->apiService->getCategory($id);
+        $category = ApiServiceFacade::getCategory($id);
         return view('admin.categories.edit', compact('category'));
     }
 
@@ -54,7 +56,7 @@ class CategoryController extends Controller
             'name' => 'required|string|max:255'
         ]);
 
-        $this->apiService->updateCategory($id, $request->all());
+        ApiServiceFacade::updateCategory($id, $request->all());
 
         return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully.');
     }
@@ -62,7 +64,7 @@ class CategoryController extends Controller
     // Delete a category
     public function destroy($id)
     {
-        $this->apiService->deleteCategory($id);
+        ApiServiceFacade::deleteCategory($id);
         return redirect()->route('admin.categories.index')->with('success', 'Category deleted successfully.');
     }
 }

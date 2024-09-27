@@ -5,20 +5,22 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Services\ApiService;
 use Illuminate\Http\Request;
+use App\Facades\ApiServiceFacade;
+
 
 class CommentController extends Controller
 {
-    protected $apiService;
+    // protected $apiService;
 
-    public function __construct(ApiService $apiService)
-    {
-        $this->apiService = $apiService;
-    }
+    // public function __construct(ApiService $apiService)
+    // {
+    //     $this->apiService = $apiService;
+    // }
 
     // Display the list of comments
     public function index()
     {
-        $comments = $this->apiService->getComments();
+        $comments = ApiServiceFacade::getComments();
         return view('admin.comments.index', compact('comments'));
     }
 
@@ -26,7 +28,7 @@ class CommentController extends Controller
     public function create()
     {
         // Fetch articles and users for selection in the form
-        $articles = $this->apiService->getArticles();
+        $articles = ApiServiceFacade::getArticles();
         return view('admin.comments.create', compact('articles'));
     }
 
@@ -38,7 +40,7 @@ class CommentController extends Controller
             'article_id' => 'required|exists:articles,id',
         ]);
 
-        $this->apiService->createComment($request->all());
+        ApiServiceFacade::createComment($request->all());
 
         return redirect()->route('admin.comments.index')->with('success', 'Comment created successfully.');
     }
@@ -46,8 +48,8 @@ class CommentController extends Controller
     // Show the form to edit a comment
     public function edit($id)
     {
-        $comment = $this->apiService->getComment($id);
-        $articles = $this->apiService->getArticles();
+        $comment = ApiServiceFacade::getComment($id);
+        $articles = ApiServiceFacade::getArticles();
         return view('admin.comments.edit', compact('comment', 'articles'));
     }
 
@@ -59,7 +61,7 @@ class CommentController extends Controller
             'article_id' => 'required|exists:articles,id',
         ]);
 
-        $this->apiService->updateComment($id, $request->all());
+        ApiServiceFacade::updateComment($id, $request->all());
 
         return redirect()->route('admin.comments.index')->with('success', 'Comment updated successfully.');
     }
@@ -67,7 +69,7 @@ class CommentController extends Controller
     // Delete a comment
     public function destroy($id)
     {
-        $this->apiService->deleteComment($id);
+        ApiServiceFacade::deleteComment($id);
         return redirect()->route('admin.comments.index')->with('success', 'Comment deleted successfully.');
     }
 }
