@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ArticleController;
+use App\Http\Controllers\Admin\AuthorController;
 
 
 /*
@@ -32,7 +33,10 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('admin')->name('admin.')->group(function() {
     Route::resource('articles', ArticleController::class);
-    // Add similar routes for authors, categories, and comments
+
+});
+Route::prefix('admin')->name('admin.')->group(function() {
+    Route::resource('authors', AuthorController::class);
 });
 
 

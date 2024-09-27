@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Services\ApiService;
 use Illuminate\Http\Request;
 
@@ -17,12 +18,12 @@ class AuthorController extends Controller
     public function index()
     {
         $authors = $this->apiService->getAuthors();
-        return view('authors.index', compact('authors'));
+        return view('admin.authors.index', compact('authors'));
     }
 
     public function create()
     {
-        return view('authors.create');
+        return view('admin.authors.create');
     }
 
     public function store(Request $request)
@@ -33,13 +34,13 @@ class AuthorController extends Controller
         ]);
 
         $this->apiService->createAuthor($validatedData);
-        return redirect()->route('authors.index')->with('success', 'Author created successfully');
+        return redirect()->route('admin.authors.index')->with('success', 'Author created successfully');
     }
 
     public function edit($id)
     {
         $author = $this->apiService->getAuthor($id);
-        return view('authors.edit', compact('author'));
+        return view('admin.authors.edit', compact('author'));
     }
 
     public function update(Request $request, $id)
@@ -50,12 +51,12 @@ class AuthorController extends Controller
         ]);
 
         $this->apiService->updateAuthor($id, $validatedData);
-        return redirect()->route('authors.index')->with('success', 'Author updated successfully');
+        return redirect()->route('admin.authors.index')->with('success', 'Author updated successfully');
     }
 
     public function destroy($id)
     {
         $this->apiService->deleteAuthor($id);
-        return redirect()->route('authors.index')->with('success', 'Author deleted successfully');
+        return redirect()->route('admin.authors.index')->with('success', 'Author deleted successfully');
     }
 }
