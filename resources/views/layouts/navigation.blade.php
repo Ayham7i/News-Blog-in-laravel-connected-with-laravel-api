@@ -15,6 +15,21 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    <!-- Articles Link -->
+                    <x-nav-link :href="route('admin.articles.index')" :active="request()->routeIs('admin.articles.index')">
+                        {{ __('Articles') }}
+                    </x-nav-link>
+
+                    <!-- Authors Link -->
+                    <x-nav-link :href="route('admin.authors.index')" :active="request()->routeIs('admin.authors.index')">
+                        {{ __('Authors') }}
+                    </x-nav-link>
+
+                    <!-- Categories Link -->
+                    <x-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.index')">
+                        {{ __('Categories') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -69,6 +84,17 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+
+            <!-- Responsive Links -->
+            <x-responsive-nav-link :href="route('admin.articles.index')" :active="request()->routeIs('admin.articles.index')">
+                {{ __('Articles') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.authors.index')" :active="request()->routeIs('admin.authors.index')">
+                {{ __('Authors') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.index')">
+                {{ __('Categories') }}
             </x-responsive-nav-link>
         </div>
 
