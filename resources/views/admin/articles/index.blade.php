@@ -44,12 +44,15 @@
                             </td>
                             <td class="px-6 py-4">{{ Str::limit($article['content'], 50) }}</td> <!-- Limit content to 50 characters -->
                             <td class="px-6 py-4 text-center">
-                                <a href="{{ route('admin.articles.edit', $article['id']) }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 mr-2">Edit</a>
-                                <form action="{{ route('admin.articles.destroy', $article['id']) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full transition duration-300" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
-                                </form>
+                                <!-- Flexbox container for buttons -->
+                                <div class="flex justify-center space-x-2">
+                                    <a href="{{ route('admin.articles.edit', $article['id']) }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full transition duration-300">Edit</a>
+                                    <form action="{{ route('admin.articles.destroy', $article['id']) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full transition duration-300" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
