@@ -10,13 +10,12 @@ class ApiService
 
     public function __construct()
     {
-        // Set the base URI for the API
         $this->client = new Client([
             'base_uri' => env('API_URL')
         ]);
     }
 
-    // --- Article API Methods ---
+    //  Article API Methods
 
     public function getArticles()
     {
@@ -52,7 +51,7 @@ class ApiService
         return json_decode($response->getBody()->getContents(), true);
     }
 
-    // --- Author API Methods ---
+    // Author API Methods
 
     public function getAuthors()
     {
@@ -90,21 +89,21 @@ class ApiService
 
     // --- Category API Methods ---
 
-    // Fetch all categories
+
     public function getCategories()
     {
         $response = $this->client->get('api/categories');
         return json_decode($response->getBody()->getContents(), true);
     }
 
-    // Fetch a specific category
+
     public function getCategory($id)
     {
         $response = $this->client->get("api/categories/{$id}");
         return json_decode($response->getBody()->getContents(), true);
     }
 
-    // Create a new category
+
     public function createCategory($data)
     {
         $response = $this->client->post('api/categories', [
@@ -113,7 +112,6 @@ class ApiService
         return json_decode($response->getBody()->getContents(), true);
     }
 
-    // Update an existing category
     public function updateCategory($id, $data)
     {
         $response = $this->client->put("api/categories/{$id}", [
@@ -122,28 +120,24 @@ class ApiService
         return json_decode($response->getBody()->getContents(), true);
     }
 
-    // Delete a category
     public function deleteCategory($id)
     {
         $response = $this->client->delete("api/categories/{$id}");
         return json_decode($response->getBody()->getContents(), true);
     }
 
-    // Fetch all comments
     public function getComments()
     {
         $response = $this->client->get('api/comments');
         return json_decode($response->getBody()->getContents(), true);
     }
 
-    // Fetch a specific comment
     public function getComment($id)
     {
         $response = $this->client->get("api/comments/{$id}");
         return json_decode($response->getBody()->getContents(), true);
     }
 
-    // Create a new comment
     public function createComment($data)
     {
         $response = $this->client->post('api/comments', [
@@ -152,7 +146,6 @@ class ApiService
         return json_decode($response->getBody()->getContents(), true);
     }
 
-    // Update an existing comment
     public function updateComment($id, $data)
     {
         $response = $this->client->put("api/comments/{$id}", [
@@ -161,7 +154,6 @@ class ApiService
         return json_decode($response->getBody()->getContents(), true);
     }
 
-    // Delete a comment
     public function deleteComment($id)
     {
         $response = $this->client->delete("api/comments/{$id}");

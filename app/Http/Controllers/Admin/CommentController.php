@@ -17,22 +17,18 @@ class CommentController extends Controller
     //     $this->apiService = $apiService;
     // }
 
-    // Display the list of comments
     public function index()
     {
         $comments = ApiServiceFacade::getComments();
         return view('admin.comments.index', compact('comments'));
     }
 
-    // Show the form to create a new comment
     public function create()
     {
-        // Fetch articles and users for selection in the form
         $articles = ApiServiceFacade::getArticles();
         return view('admin.comments.create', compact('articles'));
     }
 
-    // Store a new comment
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -45,7 +41,6 @@ class CommentController extends Controller
         return redirect()->route('admin.comments.index')->with('success', 'Comment created successfully.');
     }
 
-    // Show the form to edit a comment
     public function edit($id)
     {
         $comment = ApiServiceFacade::getComment($id);
@@ -53,7 +48,6 @@ class CommentController extends Controller
         return view('admin.comments.edit', compact('comment', 'articles'));
     }
 
-    // Update the comment
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -66,7 +60,6 @@ class CommentController extends Controller
         return redirect()->route('admin.comments.index')->with('success', 'Comment updated successfully.');
     }
 
-    // Delete a comment
     public function destroy($id)
     {
         ApiServiceFacade::deleteComment($id);
